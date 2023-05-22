@@ -14,9 +14,9 @@ class MaitreChien
         $this ->setChien($monChien);
     }
 
-    public function caresserChien() :string
+    public function caresserChien() : string
     {
-        $this->chien->crier();
+        return $this->chien->crier();
     }
         /**
      * Get the value of chien
