@@ -26,6 +26,11 @@ class Article
         $this->setTitre($titre)->setContenu($contenu)->setDatePublication(new DateTime());
     }
 
+    public function __toString()
+    {
+        
+        return $this ->titre . "<br>" . " Pourquoi tu veux convertir un objet un string? " . $this->contenu;
+    }
     
      /**
      * Get the value of titre
