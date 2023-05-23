@@ -30,6 +30,7 @@ require_once 'Vehicule.php';
 
 require_once 'Moto.php';
 require_once 'Voiture.php';
+require_once 'Pompe.php';
 
 
 $moto = new Moto('SP95', 200, 18, 5 );
@@ -39,6 +40,14 @@ echo $moto->accelerer(100);
 
 $voiture = new Voiture('SP98', 300, 40, 10);
 
+echo '<br>';
+
+$shell = new Pompe('SP95', 50);
+$moto->fairePlein($shell); 
+echo '<br>' .  $shell->getContenuCuve();
+echo '<br>';
+$audi = new Voiture('SP95', 200, 40, 1);
+$audi->fairePlein($shell); 
 
 // var_dump(get_class_methods($voiture));
 

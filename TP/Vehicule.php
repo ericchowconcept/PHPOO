@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Pompe.php';
+
 abstract class Vehicule
 {
     /**
@@ -44,7 +46,10 @@ abstract class Vehicule
         }
     }
 
+    
+    // *correction de Vincent
     public function acceleration(int $vitesseAcc)
+    // *( on compare la vitesse actuel )
     {
         if($this->vitesse+$vitesseAcc >= $this->vitesseMax)
         {
@@ -55,8 +60,39 @@ abstract class Vehicule
             echo "tu roules à" . $this->vitesse . 'km/h';
         }
     }
-  
-  
+
+   
+    
+    public function fairePlein(pompe $pompe)
+
+    {
+        $besoinEssence = $this->contenanceReservoir - $this->contenuReservoir;
+        if($this->carburant == $pompe->getTypeCarburant())
+        {
+            echo "c'est bon, c'est la même carburant";
+            if($besoinEssence <= $pompe->getContenuCuve())
+            {
+                $this->contenuReservoir =
+                $this->contenanceReservoir;
+
+                $pompe->setContenuCuve($pompe->getContenuCuve() - $besoinEssence);
+
+                echo 'le plein est fait';
+            }else{
+                $this->contenuReservoir + $pompe->getContenuCuve();
+                $pompe->setContenuCuve(0);
+
+                echo'On a pas fait le plein, tu as ' . $this->contenuReservoir . "Litres d'essences dans ton réservoir la pompe est vide";
+            }
+        }else{
+            echo "tu peux pas faire le plein";
+        }
+    }
+
+    
+
+
+    
 
     public function identifier()
     {
@@ -186,7 +222,8 @@ abstract class Vehicule
      * @return  self
      */ 
     public function setContenuReservoir(int $contenuReservoir)
-    {
+    {   
+
         $this->contenuReservoir = $contenuReservoir;
 
         return $this;
